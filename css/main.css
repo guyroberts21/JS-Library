@@ -67,7 +67,9 @@ h1 {
 }
 
 #library {
-    text-align: left;
+    text-align: center;
+    width: 50%;
+    margin: 2em auto;
 }
 
 #library li {
@@ -75,6 +77,7 @@ h1 {
     border: 1px dotted #ccc;
     padding: 10px 15px;
     position: relative;
+    
 }
 
 .delete {
