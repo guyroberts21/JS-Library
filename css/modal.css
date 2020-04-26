@@ -51,6 +51,10 @@
     width: 100%;
 }
 
+#error-message {
+    color: #e02424;
+}
+
 @keyframes modalOpen {
     from {opacity: 0}
     to {opacity: 1}

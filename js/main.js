@@ -1,5 +1,6 @@
 const library = document.getElementById('library');
 const addBookBtn = document.getElementById('submit-book');
+const errorMessage = document.getElementById('error-message');
 let myLibrary = [];
 
 // default books
@@ -10,7 +11,7 @@ function Book(title, author, pages) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-
+    
     this.info = function() {
         return `${this.title} by ${this.author}, ${this.pages} pages.`;
     }
@@ -20,17 +21,28 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
+function removeBook(e) {
+    let container = e.currentTarget.parentNode;
+    let idx = e.currentTarget.parentNode.dataset.book;
+    myLibrary.splice(idx, 1);
+    library.innerHTML = "";
+    render();
+}
 
 function render() {
     for (let book of myLibrary) {
         // book container
         const bookContainer = document.createElement('li');
         bookContainer.textContent = book.info();
+        bookContainer.dataset.book = `${myLibrary.length - 1}`;
         
         // delete btn
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = "🗑️";
         deleteBtn.classList.add('delete');
+
+        // click event to remove book
+        deleteBtn.addEventListener('click', removeBook);
         
         // append book container + append delete btn to each book container
         bookContainer.classList.add('book');
@@ -47,13 +59,15 @@ function submitBook() {
     
     // render new book on page
     if (title && author && pages) {
+        errorMessage.textContent = "";
         myLibrary.push(book);
         modal.style.display = 'none';
         library.innerHTML = "";
         render();
+    } else {
+        errorMessage.textContent = "Please fill out all the fields";
     }
 }
 
-addBookBtn.addEventListener('click', submitBook);
-
 render();
+addBookBtn.addEventListener('click', submitBook);
