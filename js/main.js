@@ -13,7 +13,7 @@ function Book(title, author, pages) {
     this.pages = pages;
     
     this.info = function() {
-        return `${this.title} by ${this.author}, ${this.pages} pages.`;
+        return `${this.title} | ${this.author} | ${this.pages} pages`;
     }
 }
 
