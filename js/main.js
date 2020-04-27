@@ -50,8 +50,17 @@ function render() {
     for (let book of myLibrary) {
         // book container
         const bookContainer = document.createElement('li');
-        bookContainer.textContent = `${book.title} | ${book.author} | ${book.pages} pages`
+        const bookText = document.createElement('span');
+        bookText.textContent = `${book.title} | ${book.author} | ${book.pages} pages`
         bookContainer.dataset.book = `${myLibrary.length - 1}`;
+
+        // read book btn
+        const readBookBtn = document.createElement('button');
+        readBookBtn.textContent = '❌';
+        readBookBtn.classList.add('read-book');
+
+        // click event to change read book
+        readBookBtn.addEventListener('click', () => readBookBtn.textContent = readBookBtn.textContent == '❌' ? '✔️' : '❌');
         
         // delete btn
         const deleteBtn = document.createElement('button');
@@ -63,7 +72,9 @@ function render() {
         
         // append book container + append delete btn to each book container
         bookContainer.classList.add('book');
+        library.appendChild(bookContainer).appendChild(bookText);
         library.appendChild(bookContainer).appendChild(deleteBtn);
+        bookContainer.insertBefore(readBookBtn, bookText);
     }
 }
 
